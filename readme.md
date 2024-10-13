@@ -37,4 +37,10 @@ NestJS Testing module added like this:
 import { Test, TestingModule } from 'npm:@nestjs/testing';
 ```
 
+#### E2E tests
+
+Can't get e2e tests working at the moment.
+
 ## 2. Set up Prisma
+
+TODO
