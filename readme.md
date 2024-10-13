@@ -43,4 +43,31 @@ Can't get e2e tests working at the moment.
 
 ## 2. Set up Prisma
 
-TODO
+Running NPM scripts: https://docs.deno.com/runtime/fundamentals/node/
+
+To run node scripts use `npm:script`. So to execute prisma Generate:
+
+```sh
+deno run -A npm:prisma generate
+deno run -A npm:prisma db push
+```
+
+> The `-A` option allows all the requested permissions. Prisma generate needs quite a few.
+
+Prisma needs ffi permission `--allow-ffi`.
+
+### Common JS imports
+
+https://docs.deno.com/runtime/fundamentals/node/
+
+Deno does not like CommonJS exports in JS files. This is what prisma generates though.
+
+To work around this, change the file names from `.js` to `.cjs` and update the relevant imports in generated files.
+
+### Package.json
+
+Running prisma scripts adds package.json files
+
+### Notes on Prisma
+
+Prisma might not be an optimal tool to use with Deno. Drizzle might be a more optimal choice as it doesn't generate stuff. However Prisma is what's mostly used for production.

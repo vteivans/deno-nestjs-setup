@@ -11,6 +11,8 @@
     "npm:@nestjs/platform-express@^10.4.4": "10.4.4_@nestjs+common@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+core@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__reflect-metadata@0.2.2__rxjs@7.8.1",
     "npm:@nestjs/testing@*": "10.4.4_@nestjs+common@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+core@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1_reflect-metadata@0.2.2_rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1___@nestjs+platform-express@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+core@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__reflect-metadata@0.2.2__rxjs@7.8.1__@nestjs+platform-express@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___@nestjs+core@10.4.4____@nestjs+common@10.4.4_____reflect-metadata@0.2.2_____rxjs@7.8.1____reflect-metadata@0.2.2____rxjs@7.8.1___@nestjs+core@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1",
     "npm:@types/node@*": "22.5.4",
+    "npm:prisma@*": "5.20.0",
+    "npm:prisma@^5.20.0": "5.20.0",
     "npm:reflect-metadata@~0.2.2": "0.2.2",
     "npm:rxjs@^7.8.1": "7.8.1",
     "npm:supertest@*": "7.0.0"
@@ -164,6 +166,35 @@
         "chalk",
         "consola",
         "node-fetch"
+      ]
+    },
+    "@prisma/debug@5.20.0": {
+      "integrity": "sha512-oCx79MJ4HSujokA8S1g0xgZUGybD4SyIOydoHMngFYiwEwYDQ5tBQkK5XoEHuwOYDKUOKRn/J0MEymckc4IgsQ=="
+    },
+    "@prisma/engines-version@5.20.0-12.06fc58a368dc7be9fbbbe894adf8d445d208c284": {
+      "integrity": "sha512-Lg8AS5lpi0auZe2Mn4gjuCg081UZf88k3cn0RCwHgR+6cyHHpttPZBElJTHf83ZGsRNAmVCZCfUGA57WB4u4JA=="
+    },
+    "@prisma/engines@5.20.0": {
+      "integrity": "sha512-DtqkP+hcZvPEbj8t8dK5df2b7d3B8GNauKqaddRRqQBBlgkbdhJkxhoJTrOowlS3vaRt2iMCkU0+CSNn0KhqAQ==",
+      "dependencies": [
+        "@prisma/debug",
+        "@prisma/engines-version",
+        "@prisma/fetch-engine",
+        "@prisma/get-platform"
+      ]
+    },
+    "@prisma/fetch-engine@5.20.0": {
+      "integrity": "sha512-JVcaPXC940wOGpCOwuqQRTz6I9SaBK0c1BAyC1pcz9xBi+dzFgUu3G/p9GV1FhFs9OKpfSpIhQfUJE9y00zhqw==",
+      "dependencies": [
+        "@prisma/debug",
+        "@prisma/engines-version",
+        "@prisma/get-platform"
+      ]
+    },
+    "@prisma/get-platform@5.20.0": {
+      "integrity": "sha512-8/+CehTZZNzJlvuryRgc77hZCWrUDYd/PmlZ7p2yNXtmf2Una4BWnTbak3us6WVdqoz5wmptk6IhsXdG2v5fmA==",
+      "dependencies": [
+        "@prisma/debug"
       ]
     },
     "@types/node@22.5.4": {
@@ -434,6 +465,9 @@
     "fresh@0.5.2": {
       "integrity": "sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q=="
     },
+    "fsevents@2.3.3": {
+      "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="
+    },
     "function-bind@1.1.2": {
       "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA=="
     },
@@ -591,6 +625,13 @@
     },
     "path-to-regexp@3.3.0": {
       "integrity": "sha512-qyCH421YQPS2WFDxDjftfc1ZR5WKQzVzqsp4n9M2kQhVOo/ByahFoUNJfl58kOcEGfQ//7weFTDhm+ss8Ecxgw=="
+    },
+    "prisma@5.20.0": {
+      "integrity": "sha512-6obb3ucKgAnsGS9x9gLOe8qa51XxvJ3vLQtmyf52CTey1Qcez3A6W6ROH5HIz5Q5bW+0VpmZb8WBohieMFGpig==",
+      "dependencies": [
+        "@prisma/engines",
+        "fsevents"
+      ]
     },
     "process-nextick-args@2.0.1": {
       "integrity": "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag=="
@@ -893,6 +934,7 @@
       "npm:@nestjs/common@^10.4.4",
       "npm:@nestjs/core@^10.4.4",
       "npm:@nestjs/platform-express@^10.4.4",
+      "npm:prisma@^5.20.0",
       "npm:reflect-metadata@~0.2.2",
       "npm:rxjs@^7.8.1"
     ]
