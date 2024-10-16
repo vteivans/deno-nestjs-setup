@@ -11,6 +11,7 @@ deno add npm:@nestjs/common npm:@nestjs/core npm:@nestjs/platform-express npm:re
 - [ ] TODO: Check if `platform-express` could be replaced with Hono.
 - [ ] TODO: Figure out how to manage Dev Dependencies. Primarily for Testing
 - [ ] TODO: Set up Docker container
+- [ ] TODO: Inspect post install scripts for `prisma`, `@nest/core`. What do they do, why are they necessary?
 
 ### 1.1 Set up NestJS testing
 
