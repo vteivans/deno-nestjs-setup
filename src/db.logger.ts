@@ -1,11 +1,10 @@
 import { Injectable, LoggerService } from "@nestjs/common";
-// @deno-types="../generated/client/index.d.ts"
-import { PrismaClient } from "../generated/client/index.cjs";
+import p from "@prisma/client";
 
 @Injectable()
 export class DbLogger implements LoggerService {
     constructor(
-        protected readonly prisma: PrismaClient,
+        protected readonly prisma: p.PrismaClient,
     ) {}
 
     async log(

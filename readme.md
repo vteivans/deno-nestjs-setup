@@ -45,7 +45,15 @@ Can't get e2e tests working at the moment.
 
 Running NPM scripts: https://docs.deno.com/runtime/fundamentals/node/
 
-To run node scripts use `npm:script`. So to execute prisma Generate:
+Install prisma as usual, just using deno:
+
+```
+deno add -A npm:prisma@latest npm:@prisma/client@latest
+```
+
+To properly install prisma `"nodeModulesDir": "auto",` is required in `deno.json`. And the scripts must be allowed to run after the install (`--allow-scripts`).
+
+To run node scripts use `npm:[script]`. So to execute prisma Generate:
 
 ```sh
 deno run -A npm:prisma generate
@@ -56,6 +64,26 @@ deno run -A npm:prisma db push
 
 Prisma needs ffi permission `--allow-ffi`.
 
+### Notes on Prisma Generation
+
+Prisma client and prisma versions must match, otherwise generation will not work.
+
+Using a specific directory in the the project for Generation output (`"generator client".output` in `schema.prisma` file) does not work as expected. Prisma generates "commonjs" code. Deno does not allow to import commonjs from inside the project without some adjustments.
+
+#### Prisma client
+
+`PrismaClient` can't be imported as named import from `@prisma/client`. That results in error:
+
+> error: Uncaught SyntaxError: The requested module '@prisma/client' does not provide an export named 'PrismaClient'
+
+Instead it can be used as a property on `default` export:
+
+```ts
+import p from "@prisma/client";
+p.PrismaClient();
+```
+
+
 ### Common JS imports
 
 https://docs.deno.com/runtime/fundamentals/node/
@@ -64,10 +92,14 @@ Deno does not like CommonJS exports in JS files. This is what prisma generates t
 
 To work around this, change the file names from `.js` to `.cjs` and update the relevant imports in generated files.
 
+Deno does not look for `type` field in `package.json` to determine the type of the package.
+
 ### Package.json
 
-Running prisma scripts adds package.json files
+Running prisma scripts adds package.json files. They can be removed and are not required for prisma to function.
 
 ### Notes on Prisma
 
 Prisma might not be an optimal tool to use with Deno. Drizzle might be a more optimal choice as it doesn't generate stuff. However Prisma is what's mostly used for production.
+
+Still have to check, how does this function inside of a monorepo. Is it possible to have a package that contains "commonjs" "automatically"? So that I could export prisma generated files?

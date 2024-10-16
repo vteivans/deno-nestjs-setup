@@ -1,10 +1,9 @@
-// @deno-types="../generated/client/index.d.ts"
-import { PrismaClient } from "../generated/client/index.cjs";
+import p from "@prisma/client";
 
 // https://www.prisma.io/docs/orm/prisma-client/deployment/edge/deploy-to-deno-deploy
 export const prismaProvider = {
-    provide: PrismaClient,
+    provide: p.PrismaClient,
     useFactory: () => {
-        return new PrismaClient();
+        return new p.PrismaClient();
     }
 }
