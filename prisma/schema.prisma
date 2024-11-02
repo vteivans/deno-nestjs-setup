@@ -6,6 +6,9 @@
 
 generator client {
   provider        = "prisma-client-js"
+  previewFeatures = ["deno"]
+  // When Prisma is compiled in DENO project location, it breaks process global.
+  // output = "./prisma-deno"
 }
 
 datasource db {

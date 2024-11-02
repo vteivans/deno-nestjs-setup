@@ -84,6 +84,16 @@ import p from "@prisma/client";
 p.PrismaClient();
 ```
 
+Prisma client can't be generated in Deno project. That breaks `process` super global. So this won't work:
+
+```prisma
+generator client {
+  // ...
+  // When Prisma is compiled in DENO project location, it breaks process global.
+  output = "./prisma-deno"
+}
+```
+
 
 ### Common JS imports
 

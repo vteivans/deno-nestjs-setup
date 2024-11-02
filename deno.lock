@@ -12,6 +12,7 @@
     "npm:@nestjs/testing@*": "10.4.4_@nestjs+common@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+core@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1_reflect-metadata@0.2.2_rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1___@nestjs+platform-express@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_@nestjs+core@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__reflect-metadata@0.2.2__rxjs@7.8.1__@nestjs+platform-express@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___@nestjs+core@10.4.4____@nestjs+common@10.4.4_____reflect-metadata@0.2.2_____rxjs@7.8.1____reflect-metadata@0.2.2____rxjs@7.8.1___@nestjs+core@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1",
     "npm:@prisma/client@^5.21.0": "5.21.0_prisma@5.21.0",
     "npm:@types/node@*": "22.5.4",
+    "npm:express@^4.21.1": "4.21.1",
     "npm:prisma@*": "5.21.0",
     "npm:prisma@^5.21.0": "5.21.0",
     "npm:reflect-metadata@~0.2.2": "0.2.2",
@@ -123,7 +124,7 @@
         "@nestjs/core@10.4.4_@nestjs+common@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_reflect-metadata@0.2.2_rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1",
         "body-parser",
         "cors",
-        "express",
+        "express@4.21.0",
         "multer",
         "tslib"
       ]
@@ -135,7 +136,7 @@
         "@nestjs/core@10.4.4_@nestjs+common@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_reflect-metadata@0.2.2_rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1",
         "body-parser",
         "cors",
-        "express",
+        "express@4.21.0",
         "multer",
         "tslib"
       ]
@@ -147,7 +148,7 @@
         "@nestjs/core@10.4.4_@nestjs+common@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1_reflect-metadata@0.2.2_rxjs@7.8.1_@nestjs+platform-express@10.4.4__@nestjs+common@10.4.4___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1__@nestjs+core@10.4.4___@nestjs+common@10.4.4____reflect-metadata@0.2.2____rxjs@7.8.1___reflect-metadata@0.2.2___rxjs@7.8.1___@nestjs+platform-express@10.4.4__reflect-metadata@0.2.2__rxjs@7.8.1",
         "body-parser",
         "cors",
-        "express",
+        "express@4.21.0",
         "multer",
         "tslib"
       ]
@@ -326,6 +327,9 @@
     "cookie@0.6.0": {
       "integrity": "sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw=="
     },
+    "cookie@0.7.1": {
+      "integrity": "sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w=="
+    },
     "cookiejar@2.1.4": {
       "integrity": "sha512-LDx6oHrK+PhzLKJU9j5S7/Y3jM/mUHvD/DeI1WQmJn652iPC5Y4TBzC9l+5OMOXlyTTA+SmVUPm0HQUwpD5Jqw=="
     },
@@ -407,7 +411,43 @@
         "body-parser",
         "content-disposition",
         "content-type",
-        "cookie",
+        "cookie@0.6.0",
+        "cookie-signature",
+        "debug@2.6.9",
+        "depd",
+        "encodeurl@2.0.0",
+        "escape-html",
+        "etag",
+        "finalhandler",
+        "fresh",
+        "http-errors",
+        "merge-descriptors",
+        "methods",
+        "on-finished",
+        "parseurl",
+        "path-to-regexp@0.1.10",
+        "proxy-addr",
+        "qs",
+        "range-parser",
+        "safe-buffer@5.2.1",
+        "send",
+        "serve-static",
+        "setprototypeof",
+        "statuses",
+        "type-is",
+        "utils-merge",
+        "vary"
+      ]
+    },
+    "express@4.21.1": {
+      "integrity": "sha512-YSFlK1Ee0/GC8QaO91tHcDxJiE/X4FbpAyQWkxAvG6AXCuR65YzK8ua6D9hvi/TzUfZMpc+BwuM1IPw8fmQBiQ==",
+      "dependencies": [
+        "accepts",
+        "array-flatten",
+        "body-parser",
+        "content-disposition",
+        "content-type",
+        "cookie@0.7.1",
         "cookie-signature",
         "debug@2.6.9",
         "depd",
@@ -942,6 +982,7 @@
       "npm:@nestjs/core@^10.4.4",
       "npm:@nestjs/platform-express@^10.4.4",
       "npm:@prisma/client@^5.21.0",
+      "npm:express@^4.21.1",
       "npm:prisma@^5.21.0",
       "npm:reflect-metadata@~0.2.2",
       "npm:rxjs@^7.8.1"
