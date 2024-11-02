@@ -1,9 +1,9 @@
 import { Logger } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
-import { DenoConsoleLogger } from "./deno-console.logger.ts";
-import { AppModule } from "./src/app.module.ts";
+import { AbstractHttpAdapter, NestFactory } from "@nestjs/core";
 import { ExpressAdapter } from "@nestjs/platform-express";
 import express from "express";
+import { DenoConsoleLogger } from "./deno-console.logger.ts";
+import { AppModule } from "./src/app.module.ts";
 
 // import process from 'node:process'
 
@@ -15,9 +15,11 @@ async function bootstrap() {
   const logger = new DenoConsoleLogger();
   Logger.overrideLogger(logger);
 
+  const expressAdapter = new ExpressAdapter(express());
+
   const app = await NestFactory.create(
     AppModule,
-    new ExpressAdapter(express()),
+    expressAdapter as unknown as AbstractHttpAdapter,
     {
       logger,
     },
