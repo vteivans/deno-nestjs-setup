@@ -9,7 +9,7 @@ deno add npm:@nestjs/common npm:@nestjs/core npm:@nestjs/platform-express npm:re
 ```
 
 - [ ] TODO: Check if `platform-express` could be replaced with Hono.
-- [ ] TODO: Figure out how to manage Dev Dependencies. Primarily for Testing
+- [x] TODO: Figure out how to manage Dev Dependencies. Primarily for Testing
 - [ ] TODO: Set up Docker container
 - [ ] TODO: Inspect post install scripts for `prisma`, `@nest/core`. What do they do, why are they necessary?
 
@@ -53,6 +53,12 @@ deno add -A npm:prisma@latest npm:@prisma/client@latest
 ```
 
 To properly install prisma `"nodeModulesDir": "auto",` is required in `deno.json`. And the scripts must be allowed to run after the install (`--allow-scripts`).
+
+To limit which packages can run scripts:
+
+```
+--allow-scripts[=<PACKAGE>...]
+```
 
 To run node scripts use `npm:[script]`. So to execute prisma Generate:
 
@@ -114,3 +120,75 @@ Running prisma scripts adds package.json files. They can be removed and are not 
 Prisma might not be an optimal tool to use with Deno. Drizzle might be a more optimal choice as it doesn't generate stuff. However Prisma is what's mostly used for production.
 
 Still have to check, how does this function inside of a monorepo. Is it possible to have a package that contains "commonjs" "automatically"? So that I could export prisma generated files?
+
+## Dev Dependencies
+
+The main point I see for Dev dependencies in Deno project are tests. Tests depend on such things as `@std/testing` and `@nestjs/testing`. None of these should be present in production. Both to reduce bundle size and not to have any redundant code that can be potentially executed when it shouldn't be.
+
+Additionally it is easier to manage the versions of all the dependencies in one location.
+
+The best way I see to manage "Dev dependencies" in Deno 2 at the moment is dedicated import map + `--cached-only` flag.
+
+### Import maps
+
+Deno install command and others support `--import-map` parameter. By which a JSON file containing dependencies and their locations can be specified. Looks the same as `imports` in `deno.json`.
+
+E.G.: `dev.json`
+
+```json
+{
+    "imports": {
+        "@std/testing": "jsr:@std/testing@^1.0.4"
+    }
+}
+```
+
+The problem with this approach (at least for now) is that the Language server doesn't seem to understand imports from other import maps. Only from `deno.json`.
+
+The packages installed from the import map seems to be added to the `deno.lock` file. The behaviour of `deno install` needs to be tested with this, to ensure no unnecessary packages are installed.
+
+#### The catch
+
+The catch is that the import map needs to be written manually as `deno add` does not support import maps. Passing the package to `deno install` next to an import map will still result in it being added to `deno.json`.
+
+This can be simplified a bit in 2 way:
+
+- Execute the `deno add` as normal. Copy the dependency to `dev.json`. Then `deno remove` the package.
+- If tests have been executed without cache limitation, hovering over the import in a test file will reveal the installed version.
+
+
+### No Cache while testing
+
+To prevent automatic install when it's undeseired use `--cached-only`.
+
+As Deno 2 Language server does not recongise packages installed through import maps other than `deno.json`, the import has to happen from full path.
+
+This will not work (if the package is not in `deno.json`):
+
+```ts
+import { beforeEach, describe, it } from "@std/testing/bdd";
+```
+
+However imports like this will cause automatic install even if it's undesired:
+
+```ts
+import { beforeEach, describe, it } from "jsr:@std/testing/bdd";
+```
+
+To prevent automatic install while running tests install the dependencies first:
+
+```sh
+deno install --import-map=dev.json
+```
+
+then run the tests from cache:
+
+```sh
+deno test --cached-only
+```
+
+## Permissions
+
+Deno allows limits the process access to system resources like files, environment variables etc... However there are some challenges to this.
+
+- Accessing FFI files relative to deno cache location. Prisma needs this `libquery_engine-debian-openssl-3.0.x.so.node` which is located deep in the cache, but the cache is located in different places for different environments. Also the library location depends on it's version.

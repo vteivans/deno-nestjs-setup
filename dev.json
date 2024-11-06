@@ -1,0 +1,7 @@
+{
+    "imports": {
+        "@std/testing": "jsr:@std/testing@1.0.4",
+        "@std/expec": "jsr:@std/expec@1.0.4",
+        "npm:@nestjs/testing": "npm:@nestjs/testing@10.4.4"
+    }
+}
