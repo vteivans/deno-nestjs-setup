@@ -192,3 +192,9 @@ deno test --cached-only
 Deno allows limits the process access to system resources like files, environment variables etc... However there are some challenges to this.
 
 - Accessing FFI files relative to deno cache location. Prisma needs this `libquery_engine-debian-openssl-3.0.x.so.node` which is located deep in the cache, but the cache is located in different places for different environments. Also the library location depends on it's version.
+
+### Post install scripts
+
+Can be allowed with `--allow-scripts`.
+
+Can they be limited per package? According to GitHub, this might work `--allow-scripts=npm:prisma`: https://github.com/denoland/deno/issues/16164
