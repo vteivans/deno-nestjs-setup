@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --env --allow-read --allow-env --allow-net --allow-ffi --watch main.ts",
+    "dev": "deno run --env --allow-read --allow-env --allow-net --allow-ffi --allow-sys=osRelease --watch main.ts",
     "prisma:generate": "deno run --allow-run --allow-env --allow-read --allow-write --allow-sys=cpus,homedir,osRelease,uid --allow-net=binaries.prisma.sh:443 npm:prisma generate",
     "prisma:db:push": "deno run --allow-env --allow-run --allow-write --allow-read --allow-sys=cpus,homedir,osRelease,uid npm:prisma db push"
   },
