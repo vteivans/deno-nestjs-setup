@@ -54,6 +54,8 @@ deno add -A npm:prisma@latest npm:@prisma/client@latest
 
 To properly install prisma `"nodeModulesDir": "auto",` is required in `deno.json`. And the scripts must be allowed to run after the install (`--allow-scripts`).
 
+Specific packages can be specified for scrips: `deno install --allow-scripts=npm:prisma`.
+
 To run node scripts use `npm:[script]`. So to execute prisma Generate:
 
 ```sh
