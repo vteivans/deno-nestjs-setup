@@ -11,7 +11,7 @@ deno add npm:@nestjs/common npm:@nestjs/core npm:@nestjs/platform-express npm:re
 - [x] TODO: Unit / Integration tests using Nest.
 - [ ] TODO: Check if `platform-express` could be replaced with Hono.
 - [ ] TODO: Figure out how to manage Dev Dependencies. Primarily for Testing
-- [ ] TODO: Set up Docker container
+- [x] TODO: Set up Docker container
 - [ ] TODO: Inspect post install scripts for `prisma`, `@nest/core`. What do they do, why are they necessary?
 - [ ] TODO: How to manage Deno permissions outside of CLI params?
 - [ ] TODO: Can I see all deno permissions requested when using `-A` flag?
@@ -109,3 +109,59 @@ Running prisma scripts adds package.json files. They can be removed and are not 
 Prisma might not be an optimal tool to use with Deno. Drizzle might be a more optimal choice as it doesn't generate stuff. However Prisma is what's mostly used for production.
 
 Still have to check, how does this function inside of a monorepo. Is it possible to have a package that contains "commonjs" "automatically"? So that I could export prisma generated files?
+
+## Docker
+
+- [x] Create a docker image from official Deno base
+- [x] Inspect the layers to understand the installation
+
+Official base image: `FROM denoland/deno:2.1.4`
+
+### Deno install
+
+Adding a task for deno install executes the install 2x for some reason. Once without the scripts and once with the scripts.
+
+Error when scripts can't run:
+
+```
+Warning The following packages contained npm lifecycle scripts (preinstall/install/postinstall) that were not executed:
+┠─ npm:@nestjs/core@10.4.4
+┠─ npm:prisma@5.21.0
+┠─ npm:@prisma/client@5.21.0
+┠─ npm:@prisma/engines@5.21.0
+┃
+┠─ This may cause the packages to not work correctly.
+┖─ To run lifecycle scripts, use the `--allow-scripts` flag with `deno install`:
+   deno install --allow-scripts=npm:@nestjs/core@10.4.4,npm:prisma@5.21.0,npm:@prisma/client@5.21.0,npm:@prisma/engines@5.21.0
+```
+
+### Debugging docker setup
+
+Rebuild with no-cache
+
+```
+docker build --progress=plain --no-cache -t deno-nestjs-setup .
+```
+
+Currently having issues with `prisma push`. Prisma is complaining about `openssl`, but I shouldn't need it as I'm using SQLite.
+
+Run the image:
+```
+docker run -p 3000:3000 deno-nestjs-setup
+```
+
+Without Openssl deno couldn't start anyway. So added the install to the Dockerfile. That fixed the `prisma push` and `deno task start`.
+
+### Inspecting image
+
+To inspect docker image layers and which file is created in which layer I used [dive](https://github.com/wagoodman/dive)
+
+### References
+
+- [Deno Docker](https://github.com/denoland/deno_docker)
+
+## Dev Dependencies
+
+Executing `deno install` without specifying import map (that should use `deno.json`). I got `@nestjs/testing` package installed. Even though it is only present in the `dev.json` import map.
+
+- [ ] Remove `@nestjs/testing` from `deno.lock`, see if it gets installed anyway.
