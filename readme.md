@@ -8,10 +8,13 @@ Manually Install the dependencies of NestJS. Deno seems to detect types automati
 deno add npm:@nestjs/common npm:@nestjs/core npm:@nestjs/platform-express npm:reflect-metadata npm:rxjs
 ```
 
+- [x] TODO: Unit / Integration tests using Nest.
 - [ ] TODO: Check if `platform-express` could be replaced with Hono.
 - [ ] TODO: Figure out how to manage Dev Dependencies. Primarily for Testing
 - [ ] TODO: Set up Docker container
 - [ ] TODO: Inspect post install scripts for `prisma`, `@nest/core`. What do they do, why are they necessary?
+- [ ] TODO: How to manage Deno permissions outside of CLI params?
+- [ ] TODO: Can I see all deno permissions requested when using `-A` flag?
 
 ### 1.1 Set up NestJS testing
 
@@ -41,6 +44,7 @@ import { Test, TestingModule } from 'npm:@nestjs/testing';
 #### E2E tests
 
 Can't get e2e tests working at the moment.
+
 
 ## 2. Set up Prisma
 
@@ -85,7 +89,6 @@ Instead it can be used as a property on `default` export:
 import p from "@prisma/client";
 p.PrismaClient();
 ```
-
 
 ### Common JS imports
 
