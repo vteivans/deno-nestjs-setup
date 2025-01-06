@@ -22,7 +22,8 @@ COPY --chown=deno:deno . .
 # https://docs.deno.com/runtime/reference/migration_guide/
 # RUN deno cache main.ts
 # With the Deno 2 release `deno cache` command is merged in to `deno install` command
-# RUN deno install --entrypoint main.ts
+RUN deno install
+# Separate this step to see what is the consequence of running the scripts
 RUN deno install --allow-scripts=npm:prisma,npm:@prisma/client,npm:@prisma/engines,npm:@nestjs/core || [$? -eq 0] || exit 1
 
 RUN deno task prisma:generate

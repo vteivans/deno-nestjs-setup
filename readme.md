@@ -12,7 +12,7 @@ deno add npm:@nestjs/common npm:@nestjs/core npm:@nestjs/platform-express npm:re
 - [ ] TODO: Check if `platform-express` could be replaced with Hono.
 - [ ] TODO: Figure out how to manage Dev Dependencies. Primarily for Testing
 - [x] TODO: Set up Docker container
-- [ ] TODO: Inspect post install scripts for `prisma`, `@nest/core`. What do they do, why are they necessary?
+- [x] TODO: Inspect post install scripts for `prisma`, `@nest/core`. What do they do, why are they necessary?
 - [ ] TODO: How to manage Deno permissions outside of CLI params?
 - [ ] TODO: Can I see all deno permissions requested when using `-A` flag?
 
@@ -165,3 +165,28 @@ To inspect docker image layers and which file is created in which layer I used [
 Executing `deno install` without specifying import map (that should use `deno.json`). I got `@nestjs/testing` package installed. Even though it is only present in the `dev.json` import map.
 
 - [ ] Remove `@nestjs/testing` from `deno.lock`, see if it gets installed anyway.
+
+
+## Post install scripts
+
+- `docker-dev.sh` will create the docker image.
+- `extract-docker-image.sh` will extract the image content for exploration.
+- `dive` helps to find the right layer to explore
+
+### @nestjs/core
+
+Unclear. Seams to have generated an empty file `.scripts-run` in it's `node_modules` folder.
+
+### @prisma/client
+
+Seems to have generated some kind of base in it's `node_modules` folder.
+
+Further inspection necessary.
+
+### @prisma/engines
+
+Downloaded the relevant engine files for the given OS.
+
+### prisma
+
+Unclear. Seams to have generated an empty file `.scripts-run` in it's `node_modules` folder.
