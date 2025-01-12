@@ -190,3 +190,12 @@ Downloaded the relevant engine files for the given OS.
 ### prisma
 
 Unclear. Seams to have generated an empty file `.scripts-run` in it's `node_modules` folder.
+
+## How do I manage Deno permissions?
+
+- [x] Is it possibler to list all permissions required when using the `-A` flag?
+
+   > No native support in Deno for this. But there is a script.
+
+- Topic in GitHub: [Ability to log all runtime granted permissions, e.g. when running with `-A`](https://github.com/denoland/deno/issues/20228)
+   - A script that can potentially solve it: [Minimize-Deno](https://github.com/sigmaSd/Minimize-Deno)

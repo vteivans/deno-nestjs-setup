@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --env --allow-read --allow-env --allow-net --allow-ffi --allow-sys=osRelease --watch main.ts",
+    "dev": "DENO_TRACE_PERMISSIONS=true deno run --env --allow-read --allow-env --allow-net --allow-ffi --allow-sys=osRelease --watch main.ts",
     "start": "deno run --env --allow-read --allow-env --allow-net --allow-ffi --allow-sys=osRelease main.ts",
     "script:install": "deno install --allow-scripts=npm:prisma,npm:@prisma/client,npm:@prisma/engines,npm:@nestjs/core",
     "prisma:generate": "deno run --allow-run --allow-env --allow-read --allow-write --allow-sys=cpus,homedir,osRelease,uid --allow-net=binaries.prisma.sh:443 npm:prisma generate",
