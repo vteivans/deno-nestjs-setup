@@ -110,6 +110,14 @@ Prisma might not be an optimal tool to use with Deno. Drizzle might be a more op
 
 Still have to check, how does this function inside of a monorepo. Is it possible to have a package that contains "commonjs" "automatically"? So that I could export prisma generated files?
 
+### References
+
+- [Issue regarding Prisma ESM Support](https://github.com/prisma/prisma/issues/5030)
+
+   > This one is still in Progress. [There is an intermediate solution with a script](https://gist.github.com/shepherdjerred/c2b75b3b49ac9a1e0be0b2dd647d8253)
+
+- [My Comment on Prisma ESM Support](https://github.com/prisma/prisma/issues/5030#issuecomment-2423004304)
+
 ## Docker
 
 - [x] Create a docker image from official Deno base
@@ -165,6 +173,7 @@ To inspect docker image layers and which file is created in which layer I used [
 Executing `deno install` without specifying import map (that should use `deno.json`). I got `@nestjs/testing` package installed. Even though it is only present in the `dev.json` import map.
 
 - [ ] Remove `@nestjs/testing` from `deno.lock`, see if it gets installed anyway.
+- [ ] Are `node_modules` required though?
 
 
 ## Post install scripts
@@ -190,6 +199,19 @@ Downloaded the relevant engine files for the given OS.
 ### prisma
 
 Unclear. Seams to have generated an empty file `.scripts-run` in it's `node_modules` folder.
+
+### Import Map - storage
+
+To store Dev Dependencies another import map outside of `deno.json` can be used.
+
+```sh
+deno install --import-map=./dev.json npm:@nestjs/testing
+```
+
+It doesn't seem possible to manage dev-dependencies without `package.json` at the moment. Using import map is tricky.
+
+- Dependencies can be installed from it, but Deno language server does not always recongnise them.
+- Dependencies from `--import-map` can't be uninstalled as far as I can see. Trying to uninstall one results in Deno suggesting it's not installed in the first place.
 
 ## How do I manage Deno permissions?
 

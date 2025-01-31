@@ -1,6 +1,6 @@
-import { Test, TestingModule } from 'npm:@nestjs/testing';
-import { describe, it, beforeEach } from "jsr:@std/testing/bdd";
-import { expect } from "jsr:@std/expect";
+import { Test, TestingModule } from '@nestjs/testing';
+import { describe, it, beforeEach } from "@std/testing/bdd";
+import { expect } from "@std/expect";
 import { AppController } from './app.controller.ts';
 import { AppService } from './app.service.ts';
 
