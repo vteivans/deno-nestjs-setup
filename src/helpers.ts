@@ -1,9 +1,16 @@
-export function deepReplace<
-  // deno-lint-ignore no-explicit-any
-  T extends Record<keyof any, unknown> | Array<unknown>,
->(
+type Replacer<T> = T | ((_: T) => T);
+
+type Replacement<T> = T extends Array<unknown> ? Replacer<T>
+  : T extends object ? {
+      [Key in keyof T]?:
+        | Replacement<T[Key]>
+        | ((_: T[Key]) => Replacement<T[Key]>);
+    }
+  : Replacer<T>;
+
+export function deepReplace<T>(
   source: T,
-  replacement: Partial<T>,
+  replacement: Replacement<T>,
   options: { assign: boolean } = { assign: false },
 ): T {
   if (!source || !replacement) {
@@ -17,7 +24,7 @@ export function deepReplace<
   if (Array.isArray(source)) {
     // Validate replacement
     if (Array.isArray(replacement)) {
-      return replacement;
+      return replacement as T;
     }
 
     throw new Error("Replacement must match the source type of be a function");
@@ -32,7 +39,10 @@ export function deepReplace<
 
       for (const [key, value] of Object.entries(replacement)) {
         if (key in res) {
-          res[key] = deepReplace(res[key], value);
+          res[key as keyof typeof res] = deepReplace(
+            res[key as keyof typeof res],
+            value,
+          );
         } else {
           console.warn("unknown key", key);
         }
@@ -43,5 +53,5 @@ export function deepReplace<
     // see what's in replacer, replace each prop
   }
 
-  return replacement;
+  return replacement as T;
 }
